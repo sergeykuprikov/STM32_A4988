@@ -68,14 +68,14 @@ void Init_Driver(short step_resolution)
 			break;
 
 	}
-	HAL_GPIO_WritePin(GPIOB, ENABLE_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOB, ENABLE_Pin, GPIO_PIN_RESET);
 }
 
 void Change_position(short position)
 {
 	_counter = 0;
 	_next_position = position;
-	HAL_GPIO_WritePin(GPIOB, ENABLE_Pin, GPIO_PIN_RESET);
+//HAL_GPIO_WritePin(GPIOB, ENABLE_Pin, GPIO_PIN_RESET);
 	if (_next_position != _current_position)
 	{
 		if (_next_position > _current_position)
@@ -117,7 +117,7 @@ void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 		if (_counter == (_options * _ticks_to_next))
 		{
 			HAL_TIM_PWM_Stop_IT(PWM, TIM_CHANNEL_1);
-			HAL_GPIO_WritePin(GPIOB, ENABLE_Pin, GPIO_PIN_SET);
+			//HAL_GPIO_WritePin(GPIOB, ENABLE_Pin, GPIO_PIN_SET);
 			_current_position = _next_position;
 		}
 	}
